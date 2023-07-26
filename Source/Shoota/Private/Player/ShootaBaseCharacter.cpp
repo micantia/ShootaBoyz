@@ -53,13 +53,24 @@ void AShootaBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 {
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		// Movement action handling
 		EnhancedInputComponent->BindAction(
 			MoveAction, ETriggerEvent::Triggered,
 			this, &AShootaBaseCharacter::Move);
 
+		// Look up action handling
 		EnhancedInputComponent->BindAction(
 			LookAction, ETriggerEvent::Triggered,
 			this, &AShootaBaseCharacter::Look);
+
+		// Jump action handling
+		EnhancedInputComponent->BindAction(
+			JumpAction, ETriggerEvent::Triggered,
+			this, &ACharacter::Jump);
+
+		EnhancedInputComponent->BindAction(
+			JumpAction, ETriggerEvent::Completed,
+			this, &ACharacter::StopJumping);
 	}
 }
 

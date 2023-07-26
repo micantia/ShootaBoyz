@@ -33,6 +33,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = Input)
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = Input)
+	UInputAction* JumpAction;
+
 public:
 	// Sets default values for this character's properties
 	AShootaBaseCharacter();
