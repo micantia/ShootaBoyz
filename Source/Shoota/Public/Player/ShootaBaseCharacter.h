@@ -9,6 +9,8 @@
 
 class UInputMappingContext;
 class UInputAction;
+class UCameraComponent;
+class USkeletalMeshComponent;
 
 UCLASS()
 class SHOOTA_API AShootaBaseCharacter : public ACharacter
@@ -16,6 +18,12 @@ class SHOOTA_API AShootaBaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
+	UCameraComponent* FPCameraComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Mesh)
+	USkeletalMeshComponent* FPSkeletalMesh;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputMappingContext* DefaultMappingContext;
 

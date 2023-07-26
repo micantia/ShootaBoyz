@@ -4,15 +4,26 @@
 #include "Player/ShootaBaseCharacter.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
 // Sets default values
 AShootaBaseCharacter::AShootaBaseCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	// Default size for collision capsule
+	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 
+	FPCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
+	FPCameraComponent->SetupAttachment(GetCapsuleComponent());
+	FPCameraComponent->bUsePawnControlRotation = true;
+
+	FPSkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonSkeletalMesh"));
+	FPSkeletalMesh->SetupAttachment(FPCameraComponent);
+	FPSkeletalMesh->SetOnlyOwnerSee(true);
+	FPSkeletalMesh->CastShadow = false;
+	FPSkeletalMesh->bCastDynamicShadow = false;
 }
 
 // Called when the game starts or when spawned
