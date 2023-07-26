@@ -14,4 +14,6 @@ class SHOOTA_API AShootaGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	AShootaGameModeBase();
 };
