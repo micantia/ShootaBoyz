@@ -34,6 +34,7 @@ void UShootaWeaponComponent::SpawnWeapon()
 
 	FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, false);
 	CurrentWeapon->AttachToComponent(Character->GetFPSkeletalMesh(), AttachmentRules, WeaponSocketName);
+	CurrentWeapon->SetOwner(Character);
 }
 
 void UShootaWeaponComponent::Fire() {
