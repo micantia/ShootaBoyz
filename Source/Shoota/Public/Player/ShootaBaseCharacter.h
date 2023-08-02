@@ -11,6 +11,7 @@ class UInputMappingContext;
 class UInputAction;
 class UCameraComponent;
 class USkeletalMeshComponent;
+class UShootaWeaponComponent;
 
 UCLASS()
 class SHOOTA_API AShootaBaseCharacter : public ACharacter
@@ -18,27 +19,37 @@ class SHOOTA_API AShootaBaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
+
+	// Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	UCameraComponent* FPCameraComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Mesh)
 	USkeletalMeshComponent* FPSkeletalMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
+	UShootaWeaponComponent* WeaponComponent;
+
+	// Inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputMappingContext* DefaultMappingContext;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* MoveAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* LookAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* JumpAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = Input)
+	UInputAction* FireAction;
 
 public:
 	// Sets default values for this character's properties
 	AShootaBaseCharacter();
+	USkeletalMeshComponent* GetFPSkeletalMesh();
 
 protected:
 	// Called when the game starts or when spawned

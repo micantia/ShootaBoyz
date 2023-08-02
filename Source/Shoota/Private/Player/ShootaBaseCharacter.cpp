@@ -8,6 +8,7 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Weapon/ShootaWeaponComponent.h"
 
 // Sets default values
 AShootaBaseCharacter::AShootaBaseCharacter()
@@ -24,6 +25,13 @@ AShootaBaseCharacter::AShootaBaseCharacter()
 	FPSkeletalMesh->SetOnlyOwnerSee(true);
 	FPSkeletalMesh->CastShadow = false;
 	FPSkeletalMesh->bCastDynamicShadow = false;
+
+	WeaponComponent = CreateDefaultSubobject<UShootaWeaponComponent>(TEXT("WeaponComponent"));
+}
+
+USkeletalMeshComponent* AShootaBaseCharacter::GetFPSkeletalMesh()
+{
+	return FPSkeletalMesh;
 }
 
 // Called when the game starts or when spawned
@@ -71,6 +79,11 @@ void AShootaBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		EnhancedInputComponent->BindAction(
 			JumpAction, ETriggerEvent::Completed,
 			this, &ACharacter::StopJumping);
+
+		// Fire action
+		EnhancedInputComponent->BindAction(
+			FireAction, ETriggerEvent::Triggered,
+			WeaponComponent, &UShootaWeaponComponent::Fire);
 	}
 }
 
